@@ -1,57 +1,48 @@
-'''
-Table parser for FIFA ranking.
-This module is used to parse the HTML table from the FIFA ranking page.
-'''
-from html.parser import HTMLParser
+from pyrankingfifa.utils import Utilities
+from pyrankingfifa.exceptions import ParserError
 
 
-class TableParser(HTMLParser):
-    '''Table parser class core. '''
+class Parser:
+    '''Parser class core.'''
 
-    def __init__(self):
-        '''Initializes the parser.'''
-        super().__init__()
+    def __init__(self, content: str, category: str):
+        '''Initialize the parser.'''
+        if not content or not category:
+            raise ParserError('Content or category is empty.')
+        self.__content = content
+        self.__category = category
         self.__data = []
-        self.__in_table = False
 
-    def handle_starttag(self, tag: str, attrs: list) -> None:
-        '''
-        Handles the start tag.
+    @property
+    def __parse_mens(self) -> list:
+        '''Parse the content for the mens category.'''
+        for row in Utilities.findall('<tr>(.*?)</tr>', self.__content):
+            data = Utilities.findall(
+                '<tr>(.*?)</tr>|title=("[^"]*"|[^,]*)|<td>(.*?)</td>', row)
+            if len(data) < 6:
+                continue
+            rank, name = data[0][2], data[1][1].replace('"', '')
+            points = data[2][2]
+            self.__data += [(rank, name, points)]
 
-        Args:
-                tag (str): The tag.
-                attrs (list): The attributes.
-        '''
-        if tag != 'table' or len(attrs) != 2 or attrs[0][1] != 'wikitable':
-            return
-        self.__in_table = True
+    @property
+    def __parse_womens(self) -> list:
+        '''Parse the content for the womens category.'''
 
-    def handle_endtag(self, tag: str) -> None:
+    def parse(self) -> list:
         '''
-        Handles the end tag.
+        Parse the content.
 
-        Args:
-                tag (str): The tag.
+        Returns:
+            list: A list of parsed data.
         '''
-        if tag == 'table' and self.__in_table:
-            self.__in_table = False
-
-    def handle_data(self, data: str) -> None:
-        '''
-        Handles the data.
-
-        Args:
-                data (str): The data value.
-        '''
-        if self.__in_table and len(data.strip()) > 0:
-            self.__data.append(data.strip())
+        action = {
+            'mens': self.__parse_mens,
+            'womens': self.__parse_womens
+        }
+        return action[self.__category]
 
     @property
     def data(self) -> list:
-        '''
-        Returns the data.
-
-        Returns:
-                list: The data.
-        '''
+        '''Return the parsed data.'''
         return self.__data
