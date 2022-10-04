@@ -12,5 +12,5 @@ from pyrankingfifa.__main__ import Ranking
 
 __title__ = 'pyrankingfifa'
 __author__ = 'Manuel Cabral'
-__version__ = '0.0.2'
+__version__ = '0.0.3'
 __license__ = 'MIT License'
