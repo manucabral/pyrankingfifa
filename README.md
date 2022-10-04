@@ -10,6 +10,7 @@ From PyPI
 ```bash
 pip install pyrankingfifa
 ```
+From source code clone it
 ```bash
 git clone https://github.com/manucabral/pyrankingfifa.git
 ```
