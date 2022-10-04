@@ -6,7 +6,10 @@ This library wraps the FIFA Ranking through ceroaceros/soccerzz website.
 Note this isn't affiliated with FIFA or ceroaceros.
 
 ### Installation
-PyPI package is not available yet, clone it.
+From PyPI
+```bash
+pip install pyrankingfifa
+```
 ```bash
 git clone https://github.com/manucabral/pyrankingfifa.git
 ```
