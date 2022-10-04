@@ -89,7 +89,7 @@ class Ranking:
         '''
         return page > 0 and page <= 11
 
-    def __download(self, filename: str, month: str, year: int, page: int):
+    def __download(self, filename: str, month: str, year: int, page: int) -> str:
         '''
         Download a ranking.
 
@@ -100,6 +100,8 @@ class Ranking:
             page (int): The page of the ranking.
         Raises:
             RankingDateError: If cannot download the ranking.
+        Returns:
+            str: The ranking in HTML format.
         '''
         endpoint = Utilities.ENDPOINT['soccerzz'][self.__category]
         url = Utilities.apply_query(endpoint, year, month, page)
@@ -121,9 +123,9 @@ class Ranking:
         except RankingDateError as exc:
             raise exc
 
-    def get(self, **kwargs):
+    def get(self, **kwargs) -> [Team]:
         '''
-        Fetch a ranking.
+        Get a FIFA ranking.
 
         Args:
             year (int): The year of the ranking.
@@ -131,6 +133,8 @@ class Ranking:
             page (int): The page of the ranking, each page contains 20 teams.
         Raises:
             RankingDateError: If the date is not available or the page is not valid.
+        Returns:
+            list: A list of Team objects.
         '''
         data = None
         month, year = self.__available_dates[0].split(' ')
