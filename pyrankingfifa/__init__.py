@@ -5,7 +5,7 @@ This library wraps the FIFA Ranking through ceroaceros/soccerzz website.
 Note this is not affiliated with FIFA or ceroaceros.
 Just enjoy it and use it for good purposes.
 
-Ceroaceros/soccerzz soruce: https://www.ceroacero.es/ranking_fifa.php
+Ceroaceros/soccerzz source: https://www.ceroacero.es/ranking_fifa.php
 Official FIFA Ranking: https://www.fifa.com/fifa-world-ranking
 '''
 from pyrankingfifa.__main__ import Ranking
