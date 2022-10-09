@@ -14,3 +14,5 @@ __title__ = 'pyrankingfifa'
 __author__ = 'Manuel Cabral'
 __version__ = '0.0.4'
 __license__ = 'MIT License'
+
+__all__ = ['Ranking']
