@@ -1,5 +1,7 @@
 ## pyrankingfifa
 
+> Deprecated library. Switch to [pyfifa](https://github.com/manucabral/pyfifa) for better performance and support.
+
 A lightweight and zero dependencies Python library that allows you to extract the Ranking FIFA since 2007.
 
 This library wraps the FIFA Ranking through ceroaceros/soccerzz website.
